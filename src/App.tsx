@@ -37,7 +37,7 @@ function App() {
         formDataToSend.append(key, value)
       })
 
-      const response = await axios.post<ApiResponse>('http://18.134.92.79:8000/suggest', formDataToSend, {
+      const response = await axios.post<ApiResponse>('http://10.0.2.110:8000/suggest', formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
