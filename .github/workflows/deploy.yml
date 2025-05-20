@@ -19,7 +19,8 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "./activity-frontend-web.service"
-          target: "/home/ubuntu/activity-frontend-web.service"
+          target: "/home/ubuntu/"
+          strip_components: 0
 
       - name: Deploy frontend to EC2
         uses: appleboy/ssh-action@v1.0.3
@@ -56,9 +57,9 @@ jobs:
             npm install
             npm run build
 
-            echo "🛠️ Ensuring systemd service file exists..."
+            echo "🛠️ Checking if .service file exists on EC2..."
             if [ ! -f "$LOCAL_TMP_FILE" ]; then
-              echo "❌ Service file was not found on EC2! SCP failed?"
+              echo "❌ ERROR: Service file not found at $LOCAL_TMP_FILE"
               exit 1
             fi
 
