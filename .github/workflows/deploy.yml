@@ -33,6 +33,7 @@ jobs:
             APP_DIR="/home/ubuntu/activity-frontend"
             REPO_URL="https://github.com/merryshalabi/activitysage-frontend.git"
             SERVICE_FILE="/etc/systemd/system/activity-frontend-web.service"
+            LOCAL_TMP_FILE="/home/ubuntu/activity-frontend-web.service"
 
             echo "📦 Cloning or updating repo..."
             if [ ! -d "$APP_DIR/.git" ]; then
@@ -55,10 +56,16 @@ jobs:
             npm install
             npm run build
 
-            echo "🛠️ Moving .service file into place (overwrite if exists)..."
-            sudo cp /home/ubuntu/activity-frontend-web.service $SERVICE_FILE
+            echo "🛠️ Ensuring systemd service file exists..."
+            if [ ! -f "$LOCAL_TMP_FILE" ]; then
+              echo "❌ Service file was not found on EC2! SCP failed?"
+              exit 1
+            fi
 
-            echo "🔁 Reloading and restarting service..."
+            echo "🛠️ Installing systemd service file..."
+            sudo cp "$LOCAL_TMP_FILE" "$SERVICE_FILE"
+
+            echo "🔁 Reloading and restarting systemd service..."
             sudo systemctl daemon-reload
             sudo systemctl enable activity-frontend-web
             sudo systemctl restart activity-frontend-web
