@@ -56,7 +56,9 @@ jobs:
             npm run build
 
             # Move the service file into place (always overwrite)
-            sudo mv /home/ubuntu/activity-frontend-web.service $SERVICE_FILE
+            sudo rm -f $SERVICE_FILE
+            sudo cp /home/ubuntu/activity-frontend-web.service $SERVICE_FILE
+
 
             # Reload and restart service
             sudo systemctl daemon-reload
