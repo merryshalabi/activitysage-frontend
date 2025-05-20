@@ -55,10 +55,7 @@ jobs:
             npm install
             npm run build
 
-            echo "🛠️ Installing systemd service..."
-            if [ -d "/home/ubuntu/activity-frontend-web.service" ]; then
-              sudo rm -rf /home/ubuntu/activity-frontend-web.service
-            fi
+            echo "🛠️ Moving .service file into place (overwrite if exists)..."
             sudo cp /home/ubuntu/activity-frontend-web.service $SERVICE_FILE
 
             echo "🔁 Reloading and restarting service..."
