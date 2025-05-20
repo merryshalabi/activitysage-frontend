@@ -9,19 +9,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Copy service file to EC2
+      - name: Upload systemd service file to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          source: "activity-frontend-web.service"
+          source: "./activity-frontend-web.service"
           target: "/home/ubuntu/activity-frontend-web.service"
 
-      - name: Deploy to EC2 via SSH
+      - name: Deploy frontend to EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
@@ -29,12 +29,12 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             set -e
-            # Variables
-            REPO_URL="https://github.com/merryshalabi/activitysage-frontend.git"
+
             APP_DIR="/home/ubuntu/activity-frontend"
+            REPO_URL="https://github.com/merryshalabi/activitysage-frontend.git"
             SERVICE_FILE="/etc/systemd/system/activity-frontend-web.service"
 
-            # Clone or pull latest
+            echo "📦 Cloning or updating repo..."
             if [ ! -d "$APP_DIR/.git" ]; then
               git clone $REPO_URL $APP_DIR
             else
@@ -44,30 +44,26 @@ jobs:
 
             cd $APP_DIR
 
-            # Install Node and serve if not present
+            echo "🧰 Installing Node.js and serve (if needed)..."
             if ! command -v node >/dev/null; then
               curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
               sudo apt-get install -y nodejs
             fi
             sudo npm install -g serve
 
-            # Install dependencies and build
+            echo "📦 Installing dependencies and building..."
             npm install
             npm run build
 
-            # Move the service file into place (always overwrite)
-              # Ensure service file is a file, not a mistaken directory
-              if [ -d "/home/ubuntu/activity-frontend-web.service" ]; then
-                echo "🧹 Removing accidentally created service directory"
-                sudo rm -rf /home/ubuntu/activity-frontend-web.service
-              fi
+            echo "🛠️ Installing systemd service..."
+            if [ -d "/home/ubuntu/activity-frontend-web.service" ]; then
+              sudo rm -rf /home/ubuntu/activity-frontend-web.service
+            fi
+            sudo cp /home/ubuntu/activity-frontend-web.service $SERVICE_FILE
 
-              # Copy the correct service file
-              sudo rm -f $SERVICE_FILE
-              sudo cp /home/ubuntu/activity-frontend-web.service $SERVICE_FILE
-
-
-            # Reload and restart service
+            echo "🔁 Reloading and restarting service..."
             sudo systemctl daemon-reload
             sudo systemctl enable activity-frontend-web
             sudo systemctl restart activity-frontend-web
+
+            echo "✅ Deployment complete"
