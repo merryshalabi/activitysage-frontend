@@ -56,8 +56,15 @@ jobs:
             npm run build
 
             # Move the service file into place (always overwrite)
-            sudo rm -f $SERVICE_FILE
-            sudo cp /home/ubuntu/activity-frontend-web.service $SERVICE_FILE
+              # Ensure service file is a file, not a mistaken directory
+              if [ -d "/home/ubuntu/activity-frontend-web.service" ]; then
+                echo "🧹 Removing accidentally created service directory"
+                sudo rm -rf /home/ubuntu/activity-frontend-web.service
+              fi
+
+              # Copy the correct service file
+              sudo rm -f $SERVICE_FILE
+              sudo cp /home/ubuntu/activity-frontend-web.service $SERVICE_FILE
 
 
             # Reload and restart service
