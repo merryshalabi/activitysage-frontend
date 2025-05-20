@@ -43,7 +43,6 @@ function App() {
         },
       })
 
-    
       setActivities(response.data.suggestions)
       setResponseTime(response.data.response_time)
     } catch (error) {
