@@ -203,21 +203,23 @@ function App() {
       {error && <div className="error">{error}</div>}
 
       {activities.length > 0 && (
-        <div className="suggestions-container">
-          <div className="activities">
-            <h2>Suggested Activities</h2>
-            {activities.map((activity, index) => (
-              <div key={index} className="activity-card">
-                <h3>{activity.title}</h3>
-                <p>{activity.description}</p>
-                <p className="cost">Estimated Cost: {activity.estimated_cost}</p>
-              </div>
-            ))}
+        <>
+          <h2 className="suggestions-title">Suggested Activities</h2>
+          <div className="suggestions-container">
+            <div className="activities-grid">
+              {activities.map((activity, index) => (
+                <div key={index} className="activity-card">
+                  <h3>{activity.title}</h3>
+                  <p>{activity.description}</p>
+                  <p className="cost">Estimated Cost: {activity.estimated_cost}</p>
+                </div>
+              ))}
+            </div>
+            {responseTime && (
+              <p className="response-time">Responded in {responseTime}</p>
+            )}
           </div>
-          {responseTime && (
-            <p className="response-time">Responded in {responseTime}</p>
-          )}
-        </div>
+        </>
       )}
     </div>
   )
