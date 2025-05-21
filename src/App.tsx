@@ -19,6 +19,12 @@ function App() {
     budget: '',
     mood: '',
     environment: '',
+    duration: '',
+    time_of_day: '',
+    age_group: '',
+    interests: '',
+    accessibility_needs: '',
+    weather: ''
   })
   const [activities, setActivities] = useState<Activity[]>([])
   const [loading, setLoading] = useState(false)
@@ -115,6 +121,76 @@ function App() {
               onChange={handleChange}
               placeholder="indoor or outdoor"
               required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="duration">Duration</label>
+            <input
+              id="duration"
+              name="duration"
+              value={formData.duration}
+              onChange={handleChange}
+              placeholder="e.g., 2 hours"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="time_of_day">Time of Day</label>
+            <input
+              id="time_of_day"
+              name="time_of_day"
+              value={formData.time_of_day}
+              onChange={handleChange}
+              placeholder="e.g., morning, afternoon, evening"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="age_group">Age Group</label>
+            <input
+              id="age_group"
+              name="age_group"
+              value={formData.age_group}
+              onChange={handleChange}
+              placeholder="e.g., adults, children, all ages"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="interests">Interests</label>
+            <input
+              id="interests"
+              name="interests"
+              value={formData.interests}
+              onChange={handleChange}
+              placeholder="e.g., sports, arts, food, nature"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="accessibility_needs">Accessibility Needs</label>
+            <input
+              id="accessibility_needs"
+              name="accessibility_needs"
+              value={formData.accessibility_needs}
+              onChange={handleChange}
+              placeholder="e.g., wheelchair accessible, no stairs"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="weather">Weather</label>
+            <input
+              id="weather"
+              name="weather"
+              value={formData.weather}
+              onChange={handleChange}
+              placeholder="e.g., sunny, rainy, snowy"
             />
           </div>
 
