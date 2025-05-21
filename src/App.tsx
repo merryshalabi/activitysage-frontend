@@ -205,9 +205,10 @@ function App() {
       {activities.length > 0 && (
         <div className="suggestions-container">
           <div className="activities">
-            <h2>Suggested Activities</h2>
+            <h2 className="suggestions-title">Suggested Activities</h2>
             {activities.map((activity, index) => (
               <div key={index} className="activity-card">
+                <span className="activity-emoji">✨</span>
                 <h3>{activity.title}</h3>
                 <p>{activity.description}</p>
                 <p className="cost">Estimated Cost: {activity.estimated_cost}</p>
