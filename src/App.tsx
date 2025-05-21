@@ -203,9 +203,9 @@ function App() {
       {error && <div className="error">{error}</div>}
 
       {activities.length > 0 && (
-        <div className="activities">
-          <h2>Suggested Activities</h2>
-          <div className="activity-list">
+        <div className="suggestions-container">
+          <div className="activities">
+            <h2>Suggested Activities</h2>
             {activities.map((activity, index) => (
               <div key={index} className="activity-card">
                 <h3>{activity.title}</h3>
