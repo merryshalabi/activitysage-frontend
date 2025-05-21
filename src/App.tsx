@@ -209,9 +209,12 @@ function App() {
             <div className="activities-grid">
               {activities.map((activity, index) => (
                 <div key={index} className="activity-card">
-                  <h3>{activity.title}</h3>
+                  <h3><span className="activity-title-emoji">✨</span>{activity.title}</h3>
                   <p>{activity.description}</p>
-                  <p className="cost">Estimated Cost: {activity.estimated_cost}</p>
+                  <div className="cost-tag">
+                    <span className="cost-emoji">💰</span>
+                    <span className="cost-text">Estimated Cost: <b>{activity.estimated_cost}</b></span>
+                  </div>
                 </div>
               ))}
             </div>
