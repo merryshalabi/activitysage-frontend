@@ -1,54 +1,51 @@
-# React + TypeScript + Vite
+# Activity Sage
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+Activity Sage is a web application that helps users discover and suggest activities based on various criteria such as budget, mood, and interests. It provides a user-friendly interface for generating activity suggestions and displays them in a visually appealing format.
 
-Currently, two official plugins are available:
+## Features
+- **Activity Suggestion Generator**: Input criteria like budget, mood, and interests to get personalized activity suggestions.
+- **Responsive Design**: The application is fully responsive, providing a seamless experience on both desktop and mobile devices.
+- **Modern UI**: Features a modern and visually appealing user interface with smooth transitions and hover effects.
+- **Real-time Feedback**: Displays response times and error messages to enhance user experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd activity-sage
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-## Expanding the ESLint configuration
+## Usage
+- Open the application in your web browser.
+- Fill in the form with your preferences for activities.
+- Click the "Generate Suggestions" button to receive activity suggestions.
+- View the suggested activities displayed in a grid layout.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Technologies Used
+- React
+- TypeScript
+- CSS for styling
+- Vite for build tooling
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## License
+This project is licensed under the MIT License.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+.activity-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 370px;
+}
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+.cost-tag, .activity-card .cost {
+  margin-top: auto;
+}
