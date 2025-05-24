@@ -43,7 +43,7 @@ function App() {
         formDataToSend.append(key, value)
       })
 
-      const response = await axios.post<ApiResponse>('http://activitysage.fursa.click:8000/suggest', formDataToSend, {
+      const response = await axios.post<ApiResponse>('http://18.134.92.79:8000/suggest', formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -228,6 +228,8 @@ function App() {
   )
 }
 
+
 export default App
+
 
 
