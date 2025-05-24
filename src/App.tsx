@@ -30,12 +30,14 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [responseTime, setResponseTime] = useState('')
+  const [suggestionTime, setSuggestionTime] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setError('')
     setResponseTime('')
+    setSuggestionTime(null)
 
     try {
       const formDataToSend = new FormData()
@@ -43,7 +45,7 @@ function App() {
         formDataToSend.append(key, value)
       })
 
-      const response = await axios.post<ApiResponse>('http://18.134.92.79:8000/suggest', formDataToSend, {
+      const response = await axios.post<ApiResponse>('http://activitysage.fursa.click:8000/suggest', formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -51,6 +53,7 @@ function App() {
 
       setActivities(response.data.suggestions)
       setResponseTime(response.data.response_time)
+      setSuggestionTime(new Date().toLocaleString())
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.data?.error) {
         setError(error.response.data.error)
@@ -218,8 +221,8 @@ function App() {
                 </div>
               ))}
             </div>
-            {responseTime && (
-              <p className="response-time">Responded in {responseTime}</p>
+            {suggestionTime && (
+              <p className="response-time">Suggested on {suggestionTime}</p>
             )}
           </div>
         </>
