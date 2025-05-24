@@ -29,14 +29,12 @@ function App() {
   const [activities, setActivities] = useState<Activity[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const [responseTime, setResponseTime] = useState('')
   const [suggestionTime, setSuggestionTime] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setError('')
-    setResponseTime('')
     setSuggestionTime(null)
 
     try {
@@ -52,7 +50,6 @@ function App() {
       })
 
       setActivities(response.data.suggestions)
-      setResponseTime(response.data.response_time)
       setSuggestionTime(new Date().toLocaleString())
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.data?.error) {
