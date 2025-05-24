@@ -14,7 +14,7 @@ describe('App', () => {
 
   test('renders Activity Suggestion Generator title', () => {
     render(<App />)
-    expect(screen.getByText('Activity Suggestion Generator')).toBeInTheDocument()
+    expect(screen.getByText('Activity Suggestion Generator🚀')).toBeInTheDocument()
   })
 
   test('submits form and displays activity suggestions', async () => {
@@ -33,10 +33,6 @@ describe('App', () => {
     fireEvent.change(screen.getByLabelText('Budget'), { target: { value: '$100' } })
     fireEvent.change(screen.getByLabelText('Mood'), { target: { value: 'happy' } })
     fireEvent.change(screen.getByLabelText('Environment'), { target: { value: 'outdoor' } })
-    fireEvent.change(screen.getByLabelText('Duration'), { target: { value: '2 hours' } })
-    fireEvent.change(screen.getByLabelText('Time of Day'), { target: { value: 'afternoon' } })
-    fireEvent.change(screen.getByLabelText('Age Group'), { target: { value: 'adults' } })
-    fireEvent.change(screen.getByLabelText('Interests'), { target: { value: 'nature' } })
 
     // Submit the form
     fireEvent.click(screen.getByText('Get Suggestions'))
@@ -67,10 +63,6 @@ describe('App', () => {
     fireEvent.change(screen.getByLabelText('Budget'), { target: { value: '$100' } })
     fireEvent.change(screen.getByLabelText('Mood'), { target: { value: 'happy' } })
     fireEvent.change(screen.getByLabelText('Environment'), { target: { value: 'outdoor' } })
-    fireEvent.change(screen.getByLabelText('Duration'), { target: { value: '2 hours' } })
-    fireEvent.change(screen.getByLabelText('Time of Day'), { target: { value: 'afternoon' } })
-    fireEvent.change(screen.getByLabelText('Age Group'), { target: { value: 'adults' } })
-    fireEvent.change(screen.getByLabelText('Interests'), { target: { value: 'nature' } })
 
     // Submit the form
     fireEvent.click(screen.getByText('Get Suggestions'))
