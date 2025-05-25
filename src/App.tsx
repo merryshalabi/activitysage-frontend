@@ -72,7 +72,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>A🚀Activity Suggestion Generator🚀</h1>
+      <h1>Activity Suggestion Generator🚀</h1>
       
       <div className="form-container">
         <form onSubmit={handleSubmit}>
